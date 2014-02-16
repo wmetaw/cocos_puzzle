@@ -79,6 +79,9 @@ void GameScene::initForVariables()
     blockTypes.push_back(kBlockYellow);
     blockTypes.push_back(kBlockGreen);
     blockTypes.push_back(kBlockGray);
+    
+    // 変数初期化
+    m_animation = false;
 }
 
 // 新しい位置をセット
@@ -176,6 +179,10 @@ void GameScene::movingBlockAnimation1(list<int> blocks)
     
     // 新しい位置がセットされたアニメーション
     moveBlock();
+    
+    // アニメーション終了時に次のアニメーション処理を開始する
+    scheduleOnce(schedule_selector(GameScene::movingBlocksAnimation2), MOVING_TIME);
+    
 }
 
 // コマのインデックスを取得
@@ -359,7 +366,9 @@ void GameScene::removingBlock(CCNode* block) {
 // タップ開始イベント
 bool GameScene::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent){
     
-    return true;
+    
+    // アニメーション中は処理を受け付けない
+    return !m_animation;
 }
 
 // タップ終了イベント
@@ -380,6 +389,9 @@ void GameScene::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
         
         if(sameColorBlockTags.size() > 1)
         {
+            // アニメーション開始
+            m_animation = true;
+            
             // 隣接するコマを削除する
             removeBlock(sameColorBlockTags, blockType);
             
@@ -387,6 +399,129 @@ void GameScene::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
             movingBlockAnimation1(sameColorBlockTags);
         }
     }
+}
+
+/*
+ * 存在する列を取得する
+ */
+map<int , bool> GameScene::getExistsBlockColum()
+{
+    // 検索用配列初期化
+    map<int, bool> xBlock;
+    for (int  i=0; i<MAX_BLOCK_X; i++)
+    {
+        xBlock[i] = false;
+    }
+    
+    // コマ種類分ループ
+    vector<kBlock>::iterator it1 = blockTypes.begin();
+    while (it1 != blockTypes.end())
+    {
+        // 各種類のコマ数分ループ
+        list<int>::iterator it2 = m_blockTags[*it1].begin();
+        while (it2 != m_blockTags[*it1].end())
+        {
+            // 存在するコマのX位置を取得
+            xBlock[getPositionIndex(*it2).x] = true;
+            
+            it2++;
+        }
+        
+        it1++;
+    }
+    
+    return xBlock;
+}
+
+/*
+ * 消えたコマ列を埋めるように新しい位置をセット
+ */
+void GameScene::searchNewPosition2()
+{
+    // 存在する列を取得
+    map<int, bool> xBlock = getExistsBlockColum();
+    
+    // コマが存在しないX位置を求める
+    bool first = true;
+    for (int i=MAX_BLOCK_X - 1 ; i>0; i--)
+    {
+        if(xBlock[i]) {
+            
+            // コマが存在する
+            first = false;
+            continue;
+        
+        } else {
+            
+            // コマが存在しない
+            if(first) {
+                // 右側にコマがない
+                continue;
+            } else {
+             
+                // この位置より右側にあるコマを左にひとつよせる
+                // コマの種類分ループ
+                vector<kBlock>::iterator it1 = blockTypes.begin();
+                while (it1 != blockTypes.end())
+                {
+                    // 各種類分のコマ数分ループ
+                    list<int>::iterator it2 = m_blockTags[*it1].begin();
+                    while (it2 != m_blockTags[*it1].end())
+                    {
+                        PositionIndex posIndex = getPositionIndex(*it2);
+                        
+                        if(i < posIndex.x) {
+                            // 移動先をセットする
+                            setNewPosition2(*it2, posIndex);
+                        }
+                        it2++;
+                    }
+                    
+                    it1++;
+                }
+            }
+        }
+    }
+    
+    
+}
+
+// 新しい位置をセット
+void GameScene::setNewPosition2(int tag, PositionIndex posIndex)
+{
+    BlockSprite* blockSprite = (BlockSprite*)m_background->getChildByTag(tag);
+    int nextPosX = blockSprite->getNextPosX();
+    if(nextPosX == -1) {
+        nextPosX = posIndex.x ;
+    }
+    
+    // 移動先の位置をセット
+    blockSprite->setNextPos(--nextPosX, posIndex.y);
+    
+}
+
+/*
+ * コマのアニメーション
+ */
+void GameScene::movingBlocksAnimation2()
+{
+    // コマの新しい位置をセットする
+    searchNewPosition2();
+    
+    // 新しい位置がセットされたコマのアニメーション
+    moveBlock();
+    
+    // アニメーション終了時に次の処理を開始する
+    scheduleOnce(schedule_selector(GameScene::movedBlocks), MOVING_TIME);
+
+}
+
+
+// コマの移動完了
+void GameScene::movedBlocks() {
+    
+    // アニメーション終了
+    m_animation = false;
 }
 
 

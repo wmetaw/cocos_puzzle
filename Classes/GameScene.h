@@ -77,6 +77,14 @@ protected:
     void moveBlock();
     void movingBlockAnimation1(std::list<int> blocks);
     
+    // 2-3-3
+    bool m_animation;
+    void movedBlocks();
+    std::map<int, bool> getExistsBlockColum();
+    void searchNewPosition2();
+    void setNewPosition2(int tag, PositionIndex posIndex);
+    void movingBlocksAnimation2();
+    
 public:
     // サウンド
     CCPlaySE* m_del_se;
