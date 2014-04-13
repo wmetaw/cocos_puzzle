@@ -146,6 +146,21 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		2A5C38FA18F99F9300FCABA7 /* blueFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38EE18F99F9300FCABA7 /* blueFont.fnt */; };
+		2A5C38FB18F99F9300FCABA7 /* blueFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38EF18F99F9300FCABA7 /* blueFont.png */; };
+		2A5C38FC18F99F9300FCABA7 /* grayFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F018F99F9300FCABA7 /* grayFont.fnt */; };
+		2A5C38FD18F99F9300FCABA7 /* grayFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F118F99F9300FCABA7 /* grayFont.png */; };
+		2A5C38FE18F99F9300FCABA7 /* greenFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F218F99F9300FCABA7 /* greenFont.fnt */; };
+		2A5C38FF18F99F9300FCABA7 /* greenFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F318F99F9300FCABA7 /* greenFont.png */; };
+		2A5C390018F99F9300FCABA7 /* redFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F418F99F9300FCABA7 /* redFont.fnt */; };
+		2A5C390118F99F9300FCABA7 /* redFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F518F99F9300FCABA7 /* redFont.png */; };
+		2A5C390218F99F9300FCABA7 /* whiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F618F99F9300FCABA7 /* whiteFont.fnt */; };
+		2A5C390318F99F9300FCABA7 /* whiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F718F99F9300FCABA7 /* whiteFont.png */; };
+		2A5C390418F99F9300FCABA7 /* yellowFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F818F99F9300FCABA7 /* yellowFont.fnt */; };
+		2A5C390518F99F9300FCABA7 /* yellowFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C38F918F99F9300FCABA7 /* yellowFont.png */; };
+		2A5C390718FABA8500FCABA7 /* gameover.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C390618FABA8500FCABA7 /* gameover.png */; };
+		2A5C390A18FACA4C00FCABA7 /* reset1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C390818FACA4C00FCABA7 /* reset1.png */; };
+		2A5C390B18FACA4C00FCABA7 /* reset2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C390918FACA4C00FCABA7 /* reset2.png */; };
 		2A86C0E918A1319A007066D6 /* removeBlock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A86C0E818A1319A007066D6 /* removeBlock.mp3 */; };
 		2A9FBD09187833CE00F59C26 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A9FBD08187833CE00F59C26 /* blue.png */; };
 		2A9FBD0B187833DE00F59C26 /* gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A9FBD0A187833DE00F59C26 /* gray.png */; };
@@ -470,6 +485,21 @@
 		1D6058910D05DD3D006BFB54 /* NyanGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyanGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2A5C38EE18F99F9300FCABA7 /* blueFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = blueFont.fnt; sourceTree = "<group>"; };
+		2A5C38EF18F99F9300FCABA7 /* blueFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueFont.png; sourceTree = "<group>"; };
+		2A5C38F018F99F9300FCABA7 /* grayFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grayFont.fnt; sourceTree = "<group>"; };
+		2A5C38F118F99F9300FCABA7 /* grayFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayFont.png; sourceTree = "<group>"; };
+		2A5C38F218F99F9300FCABA7 /* greenFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = greenFont.fnt; sourceTree = "<group>"; };
+		2A5C38F318F99F9300FCABA7 /* greenFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenFont.png; sourceTree = "<group>"; };
+		2A5C38F418F99F9300FCABA7 /* redFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redFont.fnt; sourceTree = "<group>"; };
+		2A5C38F518F99F9300FCABA7 /* redFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redFont.png; sourceTree = "<group>"; };
+		2A5C38F618F99F9300FCABA7 /* whiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = whiteFont.fnt; sourceTree = "<group>"; };
+		2A5C38F718F99F9300FCABA7 /* whiteFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteFont.png; sourceTree = "<group>"; };
+		2A5C38F818F99F9300FCABA7 /* yellowFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yellowFont.fnt; sourceTree = "<group>"; };
+		2A5C38F918F99F9300FCABA7 /* yellowFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowFont.png; sourceTree = "<group>"; };
+		2A5C390618FABA8500FCABA7 /* gameover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameover.png; sourceTree = "<group>"; };
+		2A5C390818FACA4C00FCABA7 /* reset1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset1.png; sourceTree = "<group>"; };
+		2A5C390918FACA4C00FCABA7 /* reset2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset2.png; sourceTree = "<group>"; };
 		2A86C0E818A1319A007066D6 /* removeBlock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = removeBlock.mp3; sourceTree = "<group>"; };
 		2A9FBD08187833CE00F59C26 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		2A9FBD0A187833DE00F59C26 /* gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray.png; sourceTree = "<group>"; };
@@ -1073,6 +1103,21 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2A5C390818FACA4C00FCABA7 /* reset1.png */,
+				2A5C390918FACA4C00FCABA7 /* reset2.png */,
+				2A5C390618FABA8500FCABA7 /* gameover.png */,
+				2A5C38EE18F99F9300FCABA7 /* blueFont.fnt */,
+				2A5C38EF18F99F9300FCABA7 /* blueFont.png */,
+				2A5C38F018F99F9300FCABA7 /* grayFont.fnt */,
+				2A5C38F118F99F9300FCABA7 /* grayFont.png */,
+				2A5C38F218F99F9300FCABA7 /* greenFont.fnt */,
+				2A5C38F318F99F9300FCABA7 /* greenFont.png */,
+				2A5C38F418F99F9300FCABA7 /* redFont.fnt */,
+				2A5C38F518F99F9300FCABA7 /* redFont.png */,
+				2A5C38F618F99F9300FCABA7 /* whiteFont.fnt */,
+				2A5C38F718F99F9300FCABA7 /* whiteFont.png */,
+				2A5C38F818F99F9300FCABA7 /* yellowFont.fnt */,
+				2A5C38F918F99F9300FCABA7 /* yellowFont.png */,
 				2A86C0E818A1319A007066D6 /* removeBlock.mp3 */,
 				2A9FBD101878340400F59C26 /* yellow.png */,
 				2A9FBD0E187833F400F59C26 /* red.png */,
@@ -1123,6 +1168,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = UM6Q3LLEJV;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NyanGame" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1164,23 +1214,38 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A5C390718FABA8500FCABA7 /* gameover.png in Resources */,
+				2A5C390318F99F9300FCABA7 /* whiteFont.png in Resources */,
+				2A5C38FF18F99F9300FCABA7 /* greenFont.png in Resources */,
 				7855E0E1153FEF240059DD9A /* Default.png in Resources */,
 				D4EF949A15BD2D8B00D803EB /* Icon-57.png in Resources */,
+				2A5C38FA18F99F9300FCABA7 /* blueFont.fnt in Resources */,
 				D4EF949C15BD2D8E00D803EB /* Icon-114.png in Resources */,
+				2A5C390518F99F9300FCABA7 /* yellowFont.png in Resources */,
 				D4EF949E15BD2D9600D803EB /* Icon-72.png in Resources */,
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
+				2A5C38FD18F99F9300FCABA7 /* grayFont.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
+				2A5C38FE18F99F9300FCABA7 /* greenFont.fnt in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
+				2A5C38FC18F99F9300FCABA7 /* grayFont.fnt in Resources */,
+				2A5C390A18FACA4C00FCABA7 /* reset1.png in Resources */,
+				2A5C390418F99F9300FCABA7 /* yellowFont.fnt in Resources */,
+				2A5C390B18FACA4C00FCABA7 /* reset2.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
+				2A5C390218F99F9300FCABA7 /* whiteFont.fnt in Resources */,
 				2AA98E5B1875E07C00815717 /* background.png in Resources */,
 				2A9FBD09187833CE00F59C26 /* blue.png in Resources */,
 				2A9FBD0B187833DE00F59C26 /* gray.png in Resources */,
+				2A5C390018F99F9300FCABA7 /* redFont.fnt in Resources */,
 				2A9FBD0D187833EA00F59C26 /* green.png in Resources */,
 				2A9FBD0F187833F400F59C26 /* red.png in Resources */,
 				2A9FBD111878340400F59C26 /* yellow.png in Resources */,
+				2A5C38FB18F99F9300FCABA7 /* blueFont.png in Resources */,
+				2A5C390118F99F9300FCABA7 /* redFont.png in Resources */,
 				2A86C0E918A1319A007066D6 /* removeBlock.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

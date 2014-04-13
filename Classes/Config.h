@@ -19,4 +19,6 @@ enum kBlock
     kBlockCount,
 };
 
+#define ccsf(...) CCString::createWithFormat(__VA_ARGS__)->getCString()
+
 #endif

@@ -2,6 +2,7 @@
 #include "GameScene.h"
 
 USING_NS_CC;
+#define DEBUG_MODE 0
 
 AppDelegate::AppDelegate() {
 
@@ -15,12 +16,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     CCDirector* pDirector = CCDirector::sharedDirector();
     CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
+    
+    // デバッグモード(FPS表示)
+#if DEBUG_MODE > 0
+    pDirector->setDisplayStats(true);
+#else
+    pDirector->setDisplayStats(false);
+#endif
 
     pDirector->setOpenGLView(pEGLView);
 	
-    // turn on display FPS
-    pDirector->setDisplayStats(true);
-
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
     

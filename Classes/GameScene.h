@@ -20,6 +20,17 @@
 #define PNG_BACKGROUND "background.png"
 #define MOVING_TIME 0.2f
 
+#define FONT_RED "redFont.fnt"
+#define FONT_BLUE "blueFont.fnt"
+#define FONT_YELLOW "yellowFont.fnt"
+#define FONT_GREEN "greenFont.fnt"
+#define FONT_GRAY "grayFont.fnt"
+#define FONT_WHITE "whiteFont.fnt"
+#define PNG_GAMEOVER "gameover.png"
+#define KEY_HIGHSCORE "HighScore"
+#define PNG_RESET "reset1.png"
+
+
 
 class GameScene : public cocos2d::CCLayer
 {
@@ -27,12 +38,22 @@ protected:
     
     enum kTag {
         kTagBackground = 1,
+        kTagRedLabel,
+        kTagBlueLabel,
+        kTagYellowLabel,
+        kTagGreenLabel,
+        kTagGrayLabel,
+        kTagScoreLabel,
+        kTagGameOver,
+        kTagHighScoreLabel,
         kTagBaseBlock = 10000,
     };
     
     enum kZOrder {
         kZOrderBackGround,
+        kZOrderLabel,
         kZOrderBlock,
+        kZOrderGameOver,
     };
     
     struct PositionIndex
@@ -85,10 +106,27 @@ protected:
     void setNewPosition2(int tag, PositionIndex posIndex);
     void movingBlocksAnimation2();
     
+    // 2-4-1
+    void showLabel();
+    
+    // 2-4-2
+    int m_score;
+    
+    // 2-4-3
+    bool existsSameBlock();
+    
+    // 2-4-4 ハイスコアをセーブ、表示
+    void saveHighScore();
+    void showHighScore();
+    
+    // 2-4-5リセットボタンタップ時の処理
+    void menuResetCallBack(cocos2d::CCObject* pSender);
+    void showResetButton();
+    
 public:
     // サウンド
     CCPlaySE* m_del_se;
-    
+
     virtual bool init();
     static cocos2d::CCScene* scene();
     CREATE_FUNC(GameScene);
@@ -98,12 +136,3 @@ public:
 };
 
 #endif /* defined(__NyanGame__GameScene__) */
-
-
-
-
-
-
-
-
-

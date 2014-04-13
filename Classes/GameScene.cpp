@@ -45,6 +45,13 @@ bool GameScene::init()
     // コマを表示
     showBlock();
     
+    // ラベル作成
+    showLabel();
+    showHighScore();
+    
+    // リセットボタン作成
+    showResetButton();
+    
     // 効果音の読み込み
     SimpleAudioEngine::sharedEngine()->preloadEffect(MP3_REMOVE_BLOCK);
     
@@ -82,6 +89,7 @@ void GameScene::initForVariables()
     
     // 変数初期化
     m_animation = false;
+    m_score = 0;
 }
 
 // 新しい位置をセット
@@ -389,6 +397,9 @@ void GameScene::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
         
         if(sameColorBlockTags.size() > 1)
         {
+            // 得点加算(消したコマ数 - 2 )の2乗
+            m_score += pow(sameColorBlockTags.size() - 2 , 2);
+            
             // アニメーション開始
             m_animation = true;
             
@@ -520,9 +531,161 @@ void GameScene::movingBlocksAnimation2()
 // コマの移動完了
 void GameScene::movedBlocks() {
     
+    // ラベル再表示
+    showLabel();
+    
     // アニメーション終了
     m_animation = false;
+    
+    // ゲーム終了チェック
+    if(!existsSameBlock())
+    {
+        CCSize bgSize = m_background->getContentSize();
+        
+        // ハイスコア記録・表示
+        saveHighScore();
+        
+        // ゲーム終了画面
+        CCSprite* gameOver = CCSprite::create(PNG_GAMEOVER);
+        gameOver->setPosition(ccp(bgSize.width / 2 , bgSize.height * 0.8));
+        m_background->addChild(gameOver, kZOrderGameOver, kTagGameOver);
+        
+        setTouchEnabled(false);
+    }
 }
+
+// ラベル表示
+void GameScene::showLabel()
+{
+    CCSize bgSize = m_background->getContentSize();
+    
+    // 残数表示
+    int tagsForLabel[] = {kTagRedLabel, kTagBlueLabel, kTagYellowLabel, kTagGreenLabel, kTagGrayLabel};
+    const char* fontNames[] = {FONT_RED, FONT_BLUE, FONT_YELLOW, FONT_GREEN, FONT_GRAY};
+    float heightRate[] = {0.61, 0.51, 0.41, 0.31, 0.21};
+    
+    // コマ種類分ループ
+    vector<kBlock>::iterator it = blockTypes.begin();
+    while (it != blockTypes.end())
+    {
+        // コマ残数表示
+        int count = m_blockTags[*it].size();
+        const char* countStr = ccsf("%02d", count);
+        CCLabelBMFont* label = (CCLabelBMFont*)m_background->getChildByTag(tagsForLabel[*it]);
+        
+        if(!label){
+            // コマ残数生成
+            label = CCLabelBMFont::create(countStr, fontNames[*it]);
+            label->setPosition(ccp(bgSize.width * 0.78, bgSize.height * heightRate[*it]));
+            m_background->addChild(label, kZOrderLabel, tagsForLabel[*it]);
+        } else {
+            label->setString(countStr);
+        }
+        
+        // スコア表示
+        const char* scoreStr = ccsf("%02d", m_score);
+        CCLabelBMFont* scoreLabel = (CCLabelBMFont*)m_background->getChildByTag(kTagScoreLabel);
+        if(!scoreLabel){
+            // コマ残数生成
+            scoreLabel = CCLabelBMFont::create(countStr, FONT_WHITE);
+            scoreLabel->setPosition(ccp(bgSize.width * 0.78, bgSize.height * 0.75));
+            m_background->addChild(scoreLabel, kZOrderLabel, kTagScoreLabel);
+        } else {
+            scoreLabel->setString(scoreStr);
+        }
+        
+        *it++;
+    }
+}
+
+// 全コマに対して、隣り合うコマがあるかチェック
+bool GameScene::existsSameBlock()
+{
+    // 各種類のコマ数分のループ
+    vector<kBlock>::iterator it1 = blockTypes.begin();
+    while (it1 != blockTypes.end())
+    {
+        // 各種類分のコマ数分ループ
+        list<int>::iterator it2 = m_blockTags[*it1].begin();
+        while (it2 != m_blockTags[*it1].end())
+        {
+            if(getSameColorBlockTag(*it2, *it1).size() > 1 ){
+                // 隣り合うコマが存在する場合はtrue
+                return true;
+            }
+            it2++;
+        }
+        it1++;
+    }
+    
+    // 隣り合うコマが存在しない場合はfalse
+    return false;
+}
+
+// ハイスコアラベルを表示
+void GameScene::showHighScore()
+{
+    CCSize bgSize = m_background->getContentSize();
+    
+    // ハイスコア表示
+    int highScore = CCUserDefault::sharedUserDefault()->getIntegerForKey(KEY_HIGHSCORE, 0);
+    const char* highScoreStr = ccsf("%d", highScore);
+    CCLabelBMFont* highScoreLabel = (CCLabelBMFont*)m_background->getChildByTag(kTagHighScoreLabel);
+    if(!highScoreLabel)
+    {
+        // ハイスコア生成
+        highScoreLabel = CCLabelBMFont::create(highScoreStr, FONT_WHITE);
+        highScoreLabel->setPosition(ccp(bgSize.width * 0.78, bgSize.height * 0.87));
+        m_background->addChild(highScoreLabel, kZOrderLabel, kTagHighScoreLabel);
+    } else {
+        highScoreLabel->setString(highScoreStr);
+    }
+}
+
+// ハイスコア記録・表示
+void GameScene::saveHighScore()
+{
+    CCUserDefault* userDefault = CCUserDefault::sharedUserDefault();
+    
+    // ハイスコアを取得する
+    int oldHighScore = userDefault->getIntegerForKey(KEY_HIGHSCORE, 0);
+    if( oldHighScore < m_score) {
+        
+        // ハイスコアをセーブ
+        userDefault->setIntegerForKey(KEY_HIGHSCORE, m_score);
+        userDefault->flush(); // 永続化する
+        
+        //ハイスコアを表示する
+        showHighScore();
+    }
+}
+
+
+//　リセットボタンタップ時の処理
+void GameScene::menuResetCallBack(cocos2d::CCObject *pSender)
+{
+    GameScene* scene = GameScene::create();
+    
+    // 新しい画面に書き換える
+    CCDirector::sharedDirector()->replaceScene((CCScene*)scene);
+}
+
+// リセットボタンの作成
+void GameScene::showResetButton()
+{
+    CCSize bgSize = m_background->getContentSize();
+    
+    // リセットボタン作成
+    CCMenuItemImage* resetButton = CCMenuItemImage::create(PNG_RESET, PNG_RESET, this, menu_selector(GameScene::menuResetCallBack));
+    resetButton->setPosition(ccp(bgSize.width * 0.78, bgSize.height * 0.1));
+    
+    // メニュー作成
+    CCMenu* menu = CCMenu::create(resetButton, NULL);
+    menu->setPosition(CCPointZero);
+    m_background->addChild(menu);
+}
+
+
 
 
 
